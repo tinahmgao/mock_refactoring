@@ -1,0 +1,19 @@
+{
+    "name": "refactoring",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/tinahmgao/mock_refactoring.git",
+    "author": "Tina <tina.hm.gao@gmail.com>",
+    "license": "MIT",
+    "type": "module",
+    "scripts": {
+        "test": "jest",
+        "start": "node src/index.js"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.24.7",
+        "@babel/preset-env": "^7.24.7",
+        "babel-jest": "^29.7.0",
+        "jest": "^29.7.0"
+    }
+}

@@ -1,4 +1,7 @@
-function statement(invoice, plays) {
+import invoices from './invoices.json'
+import plays from './plays.json'
+
+const statement = (invoice, plays) => {
     let totalAmount = 0
     let volumeCredits = 0
     let result = `Statement for ${invoice.customer}\n`
@@ -48,7 +51,6 @@ function statement(invoice, plays) {
     return result
 }
 
-const invoices = require('./invoices.json')
-const plays = require('./plays.json')
-
 console.log(statement(invoices[0], plays))
+
+export default statement
