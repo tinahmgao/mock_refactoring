@@ -1,7 +1,8 @@
-import invoices from './invoices.json'
-import plays from './plays.json'
+import invoices from './invoices.json' assert { type: 'json' }
+import plays from './plays.json' assert { type: 'json' }
+import { Invoice, Plays } from './type'
 
-const statement = (invoice, plays) => {
+const statement = (invoice: Invoice, plays: Plays) => {
     let totalAmount = 0
     let volumeCredits = 0
     let result = `Statement for ${invoice.customer}\n`
