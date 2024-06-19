@@ -1,4 +1,4 @@
-import statement from './index.js'
+import statement from './index'
 import invoices from './invoices.json'
 import plays from './plays.json'
 

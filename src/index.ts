@@ -1,5 +1,5 @@
-import invoices from './invoices.json' assert { type: 'json' }
-import plays from './plays.json' assert { type: 'json' }
+import invoices from './invoices.json'
+import plays from './plays.json'
 import { Invoice, Plays } from './type'
 
 const statement = (invoice: Invoice, plays: Plays) => {
