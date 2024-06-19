@@ -1,18 +1,18 @@
-export type Play = {
+export type TPlay = {
     name: string
     type: string
 }
 
-export type Plays = {
-    [key: string]: Play
+export type TPlays = {
+    [key: string]: TPlay
 }
 
-export type Invoice = {
+export type TInvoice = {
     customer: string
-    performances: Performance[]
+    performances: TPerformance[]
 }
 
-export type Performance = {
+export type TPerformance = {
     playID: string
     audience: number
 }

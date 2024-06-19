@@ -1,8 +1,8 @@
 import invoices from './invoices.json'
 import plays from './plays.json'
-import { Invoice, Plays } from './type'
+import { TInvoice, TPerformance, TPlay, TPlays } from './type'
 
-const statement = (invoice: Invoice, plays: Plays) => {
+const statement = (invoice: TInvoice, plays: TPlays) => {
     let totalAmount = 0
     let volumeCredits = 0
     let result = `Statement for ${invoice.customer}\n`
@@ -13,25 +13,7 @@ const statement = (invoice: Invoice, plays: Plays) => {
     }).format
     for (let perf of invoice.performances) {
         const play = plays[perf.playID]
-        let thisAmount = 0
-
-        switch (play.type) {
-            case 'tragedy':
-                thisAmount = 40000
-                if (perf.audience > 30) {
-                    thisAmount += 1000 * (perf.audience - 30)
-                }
-                break
-            case 'comedy':
-                thisAmount = 30000
-                if (perf.audience > 20) {
-                    thisAmount += 10000 + 500 * (perf.audience - 20)
-                }
-                thisAmount += 300 * perf.audience
-                break
-            default:
-                throw new Error(`unknown type: ${play.type}`)
-        }
+        let thisAmount = amountFor(perf, play)
 
         // add volume volumeCredits
         volumeCredits += Math.max(perf.audience - 30, 0)
@@ -50,6 +32,29 @@ const statement = (invoice: Invoice, plays: Plays) => {
     result += `You earned ${volumeCredits} credits\n`
 
     return result
+}
+
+function amountFor(perf: TPerformance, play: TPlay): number {
+    let thisAmount = 0
+    switch (play.type) {
+        case 'tragedy':
+            thisAmount = 40000
+            if (perf.audience > 30) {
+                thisAmount += 1000 * (perf.audience - 30)
+            }
+            break
+        case 'comedy':
+            thisAmount = 30000
+            if (perf.audience > 20) {
+                thisAmount += 10000 + 500 * (perf.audience - 20)
+            }
+            thisAmount += 300 * perf.audience
+            break
+        default:
+            throw new Error(`unknown type: ${play.type}`)
+    }
+
+    return thisAmount
 }
 
 console.log(statement(invoices[0], plays))
