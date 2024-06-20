@@ -1,6 +1,9 @@
-import invoices from './invoices.json'
-import plays from './plays.json'
+import invoicesJSON from './invoices.json'
+import playsJSON from './plays.json'
 import { TInvoice, TPerformance, TPlay, TPlays } from './type'
+
+const invoices: TInvoice[] = invoicesJSON
+const plays: TPlays = playsJSON
 
 const statement = (invoice: TInvoice, plays: TPlays) => {
     let totalAmount = 0
@@ -12,7 +15,7 @@ const statement = (invoice: TInvoice, plays: TPlays) => {
         minimumFractionDigits: 2,
     }).format
     for (let perf of invoice.performances) {
-        const play = plays[perf.playID]
+        const play = playFor(perf)
         let thisAmount = amountFor(perf, play)
 
         // add volume volumeCredits
@@ -55,6 +58,10 @@ function amountFor(aPerformance: TPerformance, play: TPlay): number {
     }
 
     return result
+}
+
+function playFor(aPerformance: TPerformance): TPlay {
+    return plays[aPerformance.playID]
 }
 
 console.log(statement(invoices[0], plays))
